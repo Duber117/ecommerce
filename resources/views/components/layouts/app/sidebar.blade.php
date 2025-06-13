@@ -1,3 +1,16 @@
+@php
+    $groups = [
+        'Platform' => [
+            [
+                'name' => 'Dashboard',
+                'icon' => 'home',
+                'url' => route('dashboard'),
+                'current' => request()->routeIs('dashboard'),
+            ]
+        ]
+    ]
+@endphp
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
     <head>
@@ -12,22 +25,18 @@
             </a>
 
             <flux:navlist variant="outline">
-                <flux:navlist.group :heading="__('Platform')" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                @foreach ($groups as $group => $links)
+                <flux:navlist.group :heading="$group" class="grid">
+                    @foreach ($links as $link)
+                        <flux:navlist.item :icon="$link['icon']"  :href="$link['url']" :current="$link['current']" wire:navigate>
+                            {{ $link['name'] }}
+                        </flux:navlist.item>
+                    @endforeach
                 </flux:navlist.group>
-            </flux:navlist>
+                @endforeach
+            </flux:navlist> 
 
             <flux:spacer />
-
-            <flux:navlist variant="outline">
-                <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
-                {{ __('Repository') }}
-                </flux:navlist.item>
-
-                <flux:navlist.item icon="book-open-text" href="https://laravel.com/docs/starter-kits#livewire" target="_blank">
-                {{ __('Documentation') }}
-                </flux:navlist.item>
-            </flux:navlist>
 
             <!-- Desktop User Menu -->
             <flux:dropdown class="hidden lg:block" position="bottom" align="start">
