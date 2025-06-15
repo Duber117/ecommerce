@@ -6,7 +6,31 @@
                 'icon' => 'home',
                 'url' => route('admin.dashboard'),
                 'current' => request()->routeIs('admin.dashboard'),
-            ]
+            ],
+            [
+                'name' => __('Families'),
+                'icon' => 'archive-box',
+                'url' => route('admin.families'),
+                'current' => request()->routeIs('admin.families'),
+],
+            [
+                'name' => __('Categories'),
+                'icon' => 'tag',
+                'url' => route('admin.categories'),
+                'current' => request()->routeIs('admin.categories'),
+],
+            [
+                'name' => __('Subcategories'),
+                'icon' => 'rectangle-group',
+                'url' => route('admin.subcategories'),
+                'current' => request()->routeIs('admin.subcategories'),
+],
+            [
+                'name' => __('Products'),
+                'icon' => 'arrow-path-rounded-square',
+                'url' => route('admin.products'),
+                'current' => request()->routeIs('admin.products'),
+],
         ]
     ]
 @endphp
